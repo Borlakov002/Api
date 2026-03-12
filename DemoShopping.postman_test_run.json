@@ -1,0 +1,2364 @@
+{
+    "id": "demo-1773348815990",
+    "name": "DemoShopping",
+    "timestamp": "2026-03-12T20:53:35.990Z",
+    "results": [
+        {
+            "id": "bb257fe0-ef9c-4bd0-8dd7-16b80e426850",
+            "name": "200 Sign up",
+            "url": "register",
+            "time": 188,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                188
+            ],
+            "allTests": []
+        },
+        {
+            "id": "689e2d16-b2e6-4eac-b8e1-ceaabd46ca0d",
+            "name": "200 Log in",
+            "url": "login",
+            "time": 172,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true,
+                "Response contains message": true,
+                "Response contains token": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains message": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains token": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                172
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true,
+                    "Response contains message": true,
+                    "Response contains token": true
+                }
+            ]
+        },
+        {
+            "id": "59ba77fb-0723-4a55-aa37-1ce2afe49abf",
+            "name": "400 Sign up",
+            "url": "register",
+            "time": 537,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                537
+            ],
+            "allTests": []
+        },
+        {
+            "id": "3b1293a2-d78c-4f75-9c2c-24daf31567db",
+            "name": "400 Log in",
+            "url": "login",
+            "time": 502,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                502
+            ],
+            "allTests": []
+        },
+        {
+            "id": "2c4e7f83-94cb-4d8b-a425-0d3f8b914927",
+            "name": "200 Add a new user",
+            "url": "users",
+            "time": 115,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Пользователь успешно создан": true,
+                "ID пользователя найден": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Пользователь успешно создан": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "ID пользователя найден": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                115
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Пользователь успешно создан": true,
+                    "ID пользователя найден": true
+                }
+            ]
+        },
+        {
+            "id": "aecbcb9b-8f52-424d-9359-4b3b0ee4ca15",
+            "name": "200 Get all users",
+            "url": "users",
+            "time": 490,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                490
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "9ead9b93-733b-4c2b-8951-3dcce848e2d0",
+            "name": "200 Delete user by ID",
+            "url": "users/{{test_user_id}}",
+            "time": 426,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                426
+            ],
+            "allTests": []
+        },
+        {
+            "id": "65d27e85-23ed-4d92-ab56-31465a840438",
+            "name": "400 Add a new user",
+            "url": "users",
+            "time": 297,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                297
+            ],
+            "allTests": []
+        },
+        {
+            "id": "3d4664ae-b6da-4500-8383-f7721438491f",
+            "name": "500 Get all users",
+            "url": "users",
+            "time": 319,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                319
+            ],
+            "allTests": []
+        },
+        {
+            "id": "13694693-ca23-44fa-8093-be98e4730599",
+            "name": "404 Delete user by ID",
+            "url": "users/3904",
+            "time": 334,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                334
+            ],
+            "allTests": []
+        },
+        {
+            "id": "f48120fb-887f-49f9-8d9e-b506c1067ba0",
+            "name": "200 Get list all products",
+            "url": "products",
+            "time": 347,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Время ответа меньше 500 мс": true,
+                "Ответ является JSON": true,
+                "Ответ является массивом": true,
+                "Список товаров не пустой": true,
+                "Товар содержит обязательные поля": true,
+                "Типы данных корректные": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Время ответа меньше 500 мс": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Ответ является JSON": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Ответ является массивом": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Список товаров не пустой": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Товар содержит обязательные поля": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Типы данных корректные": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                347
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Время ответа меньше 500 мс": true,
+                    "Ответ является JSON": true,
+                    "Ответ является массивом": true,
+                    "Список товаров не пустой": true,
+                    "Товар содержит обязательные поля": true,
+                    "Типы данных корректные": true
+                }
+            ]
+        },
+        {
+            "id": "ca506f7a-7abc-4edb-b1e6-b00ecb714c24",
+            "name": "200 Find product by ID",
+            "url": "products/id/1",
+            "time": 266,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Время ответа < 500 мс": true,
+                "ID товара равен 1": true,
+                "Типы данных корректные": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Время ответа < 500 мс": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "ID товара равен 1": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Типы данных корректные": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                266
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Время ответа < 500 мс": true,
+                    "ID товара равен 1": true,
+                    "Типы данных корректные": true
+                }
+            ]
+        },
+        {
+            "id": "56ec55ab-aa95-43c0-9785-4efb628c5d8d",
+            "name": "200 Find product by category",
+            "url": "products/FindByCategory",
+            "time": 278,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Ответ является массивом": true,
+                "Категория товара = Laptops": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Ответ является массивом": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Категория товара = Laptops": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                278
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Ответ является массивом": true,
+                    "Категория товара = Laptops": true
+                }
+            ]
+        },
+        {
+            "id": "d52a873a-4cf6-4538-ac9b-7cdaaa182c1b",
+            "name": "200 Find product by manufacturer",
+            "url": "products/FindByManufacturer",
+            "time": 182,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Ответ является массивом": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Ответ является массивом": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                182
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Ответ является массивом": true
+                }
+            ]
+        },
+        {
+            "id": "24a2ccc1-c66b-4cfe-bb1a-f832c800bb66",
+            "name": "200 Find a product with free shipping.",
+            "url": "products/FindByShipping",
+            "time": 392,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                392
+            ],
+            "allTests": []
+        },
+        {
+            "id": "47a73b23-3fec-4728-b62f-ce8d2fd6c818",
+            "name": "200 Filtering the product list",
+            "url": "products/filter",
+            "time": 384,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                384
+            ],
+            "allTests": []
+        },
+        {
+            "id": "4c25be94-d0bb-43ad-b747-1b2f45be626e",
+            "name": "404 Find product by ID",
+            "url": "products/id/22844",
+            "time": 152,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                152
+            ],
+            "allTests": []
+        },
+        {
+            "id": "e532a204-c06f-48d3-86e1-c1966653ada3",
+            "name": "404 Find product by category",
+            "url": "products/FindByCategory",
+            "time": 430,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                430
+            ],
+            "allTests": []
+        },
+        {
+            "id": "72dbc1b9-0f40-4e28-91da-2a5c8371c558",
+            "name": "404 Find product by manufacturer",
+            "url": "products/FindByManufacturer",
+            "time": 306,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                306
+            ],
+            "allTests": []
+        },
+        {
+            "id": "7b9e7bab-1fa8-480e-aa5b-589592fc32f3",
+            "name": "404 (Returns 200) Find a product with free shipping.",
+            "url": "products/FindByShipping",
+            "time": 280,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                280
+            ],
+            "allTests": []
+        },
+        {
+            "id": "4593a97b-ba20-47eb-a8f6-105fe60c01a4",
+            "name": "400 Filtering the product list",
+            "url": "products/filter",
+            "time": 235,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                235
+            ],
+            "allTests": []
+        },
+        {
+            "id": "c230538b-4d89-4b36-b849-99e38e338c42",
+            "name": "200 Add a new product",
+            "url": "add-product",
+            "time": 114,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true,
+                "Response contains product ID": true,
+                "Product ID extracted": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains product ID": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Product ID extracted": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                114
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true,
+                    "Response contains product ID": true,
+                    "Product ID extracted": true
+                }
+            ]
+        },
+        {
+            "id": "caec4b05-ee31-43df-bfd5-6beed18081c0",
+            "name": "200 Partially update product by ID",
+            "url": "products/id/{{product_id}}",
+            "time": 424,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                424
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true
+                }
+            ]
+        },
+        {
+            "id": "99e16615-e067-4eed-8047-55482efbb51f",
+            "name": "200 Complete product update by ID",
+            "url": "products/id/{{product_id}}",
+            "time": 119,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                119
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true
+                }
+            ]
+        },
+        {
+            "id": "5bc59a23-1d28-4983-ab91-92df219b171d",
+            "name": "200 Delete product by ID",
+            "url": "products/id/{{product_id}}",
+            "time": 231,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                231
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true
+                }
+            ]
+        },
+        {
+            "id": "2308170d-42a2-4390-8a17-ce94b51ad574",
+            "name": "400 Add a new product",
+            "url": "add-product",
+            "time": 380,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                380
+            ],
+            "allTests": []
+        },
+        {
+            "id": "32bf7866-43fd-4329-a6a2-9f61f53dad22",
+            "name": "400 Partially update product by ID",
+            "url": "products/id/22852",
+            "time": 408,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                408
+            ],
+            "allTests": []
+        },
+        {
+            "id": "e130a2a2-f631-452e-b44c-bad8a7701d07",
+            "name": "404 Partially update product by ID",
+            "url": "products/id/22844",
+            "time": 376,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                376
+            ],
+            "allTests": []
+        },
+        {
+            "id": "673bf144-4592-43b5-a5dc-846ece51634e",
+            "name": "400 Complete product update by ID",
+            "url": "products/id/22852",
+            "time": 514,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                514
+            ],
+            "allTests": []
+        },
+        {
+            "id": "84ee5d94-1aa5-4b69-b744-34d29e64d4f4",
+            "name": "404 Complete product update by ID",
+            "url": "products/id/22851",
+            "time": 545,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                545
+            ],
+            "allTests": []
+        },
+        {
+            "id": "3db69fab-67c9-444e-8cae-ae4569b6d436",
+            "name": "403 Delete product by ID",
+            "url": "products/id/50",
+            "time": 130,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                130
+            ],
+            "allTests": []
+        },
+        {
+            "id": "3b319360-c164-4b66-93e1-783def836379",
+            "name": "404 Delete product by ID",
+            "url": "products/id/22844",
+            "time": 348,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                348
+            ],
+            "allTests": []
+        },
+        {
+            "id": "593b52ac-b8e0-488d-a5f9-575e4feca035",
+            "name": "200 Add product to cart",
+            "url": "cart",
+            "time": 447,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true,
+                "Response contains user cart ID": true,
+                "Cart user ID extracted": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains user cart ID": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Cart user ID extracted": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                447
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true,
+                    "Response contains user cart ID": true,
+                    "Cart user ID extracted": true
+                }
+            ]
+        },
+        {
+            "id": "b0dbee88-c54c-4058-b29e-6d2b830e935d",
+            "name": "200 Get user cart contents",
+            "url": "getCart",
+            "time": 509,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true,
+                "Response is an array": true,
+                "Cart is not empty": true,
+                "cart_item_id exists": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response is an array": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Cart is not empty": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "cart_item_id exists": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                509
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true,
+                    "Response is an array": true,
+                    "Cart is not empty": true,
+                    "cart_item_id exists": true
+                }
+            ]
+        },
+        {
+            "id": "3207c88e-4284-4fd1-b3d5-e69a25930c95",
+            "name": "200 Update quantity to cart",
+            "url": "cart/{{cart_item_id}}",
+            "time": 499,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                499
+            ],
+            "allTests": []
+        },
+        {
+            "id": "4626c001-7bd2-4785-8c4f-20d7b429e4e9",
+            "name": "200 Remove item from cart",
+            "url": "cart/{{cart_item_id}}",
+            "time": 331,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                331
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true
+                }
+            ]
+        },
+        {
+            "id": "abb276fd-e60c-4321-8e0a-ed6177f480c6",
+            "name": "400 Add product to cart",
+            "url": "cart",
+            "time": 116,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                116
+            ],
+            "allTests": []
+        },
+        {
+            "id": "f5881ef9-4afb-47b0-8170-6ccc71a7448e",
+            "name": "401 Add product to cart",
+            "url": "cart",
+            "time": 471,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                471
+            ],
+            "allTests": []
+        },
+        {
+            "id": "c5fb52d1-1471-4355-9991-695553fc5e88",
+            "name": "500 Add product to cart",
+            "url": "cart",
+            "time": 373,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                373
+            ],
+            "allTests": []
+        },
+        {
+            "id": "84c8cb74-fcd6-4383-b20d-269f91958c8e",
+            "name": "401 Get user cart contents",
+            "url": "getCart",
+            "time": 266,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                266
+            ],
+            "allTests": []
+        },
+        {
+            "id": "11022df6-ff06-4dde-881c-a9f3617381a2",
+            "name": "404 Get user cart contents",
+            "url": "getCart",
+            "time": 344,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                344
+            ],
+            "allTests": []
+        },
+        {
+            "id": "2f58c544-427e-48c1-9582-366fd794ddea",
+            "name": "500 Get user cart contents",
+            "url": "",
+            "time": 77,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                77
+            ],
+            "allTests": []
+        },
+        {
+            "id": "27140204-7bd0-403d-b58d-92abf4e3c49f",
+            "name": "400 Update quantity to cart",
+            "url": "cart/21789",
+            "time": 237,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                237
+            ],
+            "allTests": []
+        },
+        {
+            "id": "04842170-2b55-48c3-8b55-b0a395d916c1",
+            "name": "401 Update quantity to cart",
+            "url": "cart/21789",
+            "time": 168,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                168
+            ],
+            "allTests": []
+        },
+        {
+            "id": "8ac4590b-25c9-4d8d-873d-cbbe03e17362",
+            "name": "404 Update quantity to cart",
+            "url": "cart/2178",
+            "time": 95,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                95
+            ],
+            "allTests": []
+        },
+        {
+            "id": "4f5de21c-7ca8-4cf8-92c5-45954801e7ba",
+            "name": "500 Update quantity to cart",
+            "url": "",
+            "time": 251,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                251
+            ],
+            "allTests": []
+        },
+        {
+            "id": "34414367-afaa-4337-abc7-89c2eca64c89",
+            "name": "400 Remove item from cart",
+            "url": "cart/фвыалофвы",
+            "time": 351,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                351
+            ],
+            "allTests": []
+        },
+        {
+            "id": "fbfee664-3db0-451f-b04f-7d07b3e7bc4c",
+            "name": "401 Remove item from cart",
+            "url": "cart/21789",
+            "time": 89,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                89
+            ],
+            "allTests": []
+        },
+        {
+            "id": "f76653ac-b0ef-4e71-bc27-fdbc6e65a687",
+            "name": "404 Remove item from cart",
+            "url": "cart/21789",
+            "time": 130,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                130
+            ],
+            "allTests": []
+        },
+        {
+            "id": "b58653da-d471-49f0-9ac9-1a207492f27e",
+            "name": "500 Remove item from cart",
+            "url": "",
+            "time": 355,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                355
+            ],
+            "allTests": []
+        },
+        {
+            "id": "9e784dc3-f259-452f-9c0c-e56635180521",
+            "name": "201 Create order",
+            "url": "orders",
+            "time": 110,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 201": true,
+                "Response contains success message": true,
+                "Response contains orderId": true
+            },
+            "testPassFailCounts": {
+                "Status code is 201": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains success message": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains orderId": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                110
+            ],
+            "allTests": [
+                {
+                    "Status code is 201": true,
+                    "Response contains success message": true,
+                    "Response contains orderId": true
+                }
+            ]
+        },
+        {
+            "id": "117c0b44-c17a-43bf-9b68-4b785c03036f",
+            "name": "200 Get list all orders",
+            "url": "user-orders",
+            "time": 475,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                475
+            ],
+            "allTests": []
+        },
+        {
+            "id": "610f8e1e-a115-4359-8aa1-c979a99adc1e",
+            "name": "200 Change item quantity",
+            "url": "orders/{{order_id}}/products/{{product_id}}",
+            "time": 86,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                86
+            ],
+            "allTests": []
+        },
+        {
+            "id": "d82b666e-e494-4164-8d29-b3dc1d2ca248",
+            "name": "200 Recalculate Total",
+            "url": "update-orders-total",
+            "time": 202,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                202
+            ],
+            "allTests": []
+        },
+        {
+            "id": "30d4c2cb-2f1a-4dee-be9f-a1192044386b",
+            "name": "200 Remove item from order",
+            "url": "orders/{{order_id}}/products/{{product_id}}",
+            "time": 211,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                211
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true
+                }
+            ]
+        },
+        {
+            "id": "ca78488a-ff30-4d72-bf49-c2be3e0b7520",
+            "name": "200 Get paid history",
+            "url": "api/orders-history",
+            "time": 284,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                284
+            ],
+            "allTests": []
+        },
+        {
+            "id": "34acab2f-ee86-4cc0-b42b-1f9cfbc15d4c",
+            "name": "401 Create order",
+            "url": "orders",
+            "time": 286,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                286
+            ],
+            "allTests": []
+        },
+        {
+            "id": "6905d05f-f4ec-474e-b5fa-b35899ed3292",
+            "name": "500 Create order",
+            "url": "",
+            "time": 102,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                102
+            ],
+            "allTests": []
+        },
+        {
+            "id": "62d805af-97a7-4e6f-b2fa-1fa05aa2769c",
+            "name": "401 Get list all orders",
+            "url": "user-orders",
+            "time": 312,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                312
+            ],
+            "allTests": []
+        },
+        {
+            "id": "eb6ae96a-ca74-4c13-a064-29643035b191",
+            "name": "500 Get list all orders",
+            "url": "",
+            "time": 390,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                390
+            ],
+            "allTests": []
+        },
+        {
+            "id": "ab2fa48c-a00e-4928-b5b3-82231de305bb",
+            "name": "400 Change item quantity",
+            "url": "orders/6901/products/22854",
+            "time": 346,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                346
+            ],
+            "allTests": []
+        },
+        {
+            "id": "4e0b3069-de49-40ab-a302-b2f7d3d8e9cc",
+            "name": "401 Change item quantity",
+            "url": "orders/6901/products/22854",
+            "time": 177,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                177
+            ],
+            "allTests": []
+        },
+        {
+            "id": "84164c58-bfc0-49ba-a5a8-938cd2f4af71",
+            "name": "404 Change item quantity",
+            "url": "orders/690/products/22854",
+            "time": 256,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                256
+            ],
+            "allTests": []
+        },
+        {
+            "id": "79e4739a-4895-40c9-bad0-cde03dd0ef53",
+            "name": "500 Change item quantity",
+            "url": "orders/6901/products/22854",
+            "time": 518,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                518
+            ],
+            "allTests": []
+        },
+        {
+            "id": "596272f5-a1ae-43b2-8165-db114bda4336",
+            "name": "401 Recalculate Total",
+            "url": "update-orders-total",
+            "time": 203,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                203
+            ],
+            "allTests": []
+        },
+        {
+            "id": "edc71f93-f12f-40bd-ab32-82e82511a4e2",
+            "name": "500 Recalculate Total",
+            "url": "",
+            "time": 293,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                293
+            ],
+            "allTests": []
+        },
+        {
+            "id": "2fee2c1f-e5c8-47fa-9603-999367aa10a7",
+            "name": "400 Remove item from order",
+            "url": "",
+            "time": 229,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                229
+            ],
+            "allTests": []
+        },
+        {
+            "id": "1c1ef33a-6c74-41a8-bac2-095f0304bb7a",
+            "name": "401 Remove item from order",
+            "url": "orders/6901/products/22854",
+            "time": 321,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                321
+            ],
+            "allTests": []
+        },
+        {
+            "id": "6e9c16d4-7716-4af4-ad4d-f8e37806f049",
+            "name": "404 Remove item from order",
+            "url": "orders/6901/products/22854",
+            "time": 365,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                365
+            ],
+            "allTests": []
+        },
+        {
+            "id": "c1954926-f0a0-44fa-bb3e-377b76a18f0a",
+            "name": "500 Remove item from order",
+            "url": "",
+            "time": 190,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                190
+            ],
+            "allTests": []
+        },
+        {
+            "id": "dfceb55d-e7ef-4ede-b3a6-537b4e750e88",
+            "name": "401 Get paid history",
+            "url": "",
+            "time": 79,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                79
+            ],
+            "allTests": []
+        },
+        {
+            "id": "ea9a1009-9211-40ca-864b-ffcecc4c4154",
+            "name": "500 Get paid history",
+            "url": "",
+            "time": 248,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                248
+            ],
+            "allTests": []
+        },
+        {
+            "id": "2684b171-b168-4167-b05f-57457e749c15",
+            "name": "200 Update to balance",
+            "url": "updateBalances",
+            "time": 379,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                379
+            ],
+            "allTests": []
+        },
+        {
+            "id": "6b93473a-fb26-4e4f-b87e-c913f9ee4301",
+            "name": "500 Update to balance",
+            "url": "updateBalances",
+            "time": 124,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                124
+            ],
+            "allTests": []
+        },
+        {
+            "id": "bce3a08c-4769-4cb4-ba5f-d8dbcae1649f",
+            "name": "200 Payment for the order",
+            "url": "pay",
+            "time": 353,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                353
+            ],
+            "allTests": []
+        },
+        {
+            "id": "a3b95ec3-0325-4cd2-8a68-6db83ce71bf8",
+            "name": "400 Payment for the order",
+            "url": "",
+            "time": 79,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                79
+            ],
+            "allTests": []
+        },
+        {
+            "id": "e5610a0f-dbee-4bce-9c5d-e2ceabdb6d2b",
+            "name": "401 Payment for the order",
+            "url": "",
+            "time": 101,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                101
+            ],
+            "allTests": []
+        },
+        {
+            "id": "4da9b7a3-e772-48a2-b098-8078032ca2af",
+            "name": "500 Payment for the order",
+            "url": "",
+            "time": 335,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                335
+            ],
+            "allTests": []
+        },
+        {
+            "id": "5690b374-32b5-4249-bc7f-a25ae7734ace",
+            "name": "200 Resetting the database",
+            "url": "",
+            "time": 444,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                444
+            ],
+            "allTests": []
+        },
+        {
+            "id": "e9d89264-5d6f-4986-83a5-d733a2f6f91f",
+            "name": "500 Resetting the database",
+            "url": "",
+            "time": 391,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                391
+            ],
+            "allTests": []
+        },
+        {
+            "id": "e3cefe58-f84e-4f48-ae91-13dab9820c8a",
+            "name": "200 Log in",
+            "url": "login",
+            "time": 122,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true,
+                "Response contains message": true,
+                "Response contains token": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains message": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains token": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                122
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true,
+                    "Response contains message": true,
+                    "Response contains token": true
+                }
+            ]
+        },
+        {
+            "id": "1298589f-078a-4b24-9c80-e4e9ef5caadd",
+            "name": "200 Add a new user",
+            "url": "users",
+            "time": 271,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Пользователь успешно создан": true,
+                "ID пользователя найден": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Пользователь успешно создан": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "ID пользователя найден": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                271
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Пользователь успешно создан": true,
+                    "ID пользователя найден": true
+                }
+            ]
+        },
+        {
+            "id": "446b660b-7b4a-44e6-9770-cbe8377e3126",
+            "name": "200 Get all users",
+            "url": "users",
+            "time": 440,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                440
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "a778085b-9bf5-4abd-a5d2-ea210bad46c0",
+            "name": "200 Delete user by ID",
+            "url": "users/{{test_user_id}}",
+            "time": 165,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                165
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "b2ebc8ec-17d5-4a79-b0ae-3e23ac32529c",
+            "name": "200 Get list all products",
+            "url": "products",
+            "time": 166,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Время ответа меньше 500 мс": true,
+                "Ответ является JSON": true,
+                "Ответ является массивом": true,
+                "Список товаров не пустой": true,
+                "Товар содержит обязательные поля": true,
+                "Типы данных корректные": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Время ответа меньше 500 мс": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Ответ является JSON": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Ответ является массивом": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Список товаров не пустой": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Товар содержит обязательные поля": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Типы данных корректные": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                166
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Время ответа меньше 500 мс": true,
+                    "Ответ является JSON": true,
+                    "Ответ является массивом": true,
+                    "Список товаров не пустой": true,
+                    "Товар содержит обязательные поля": true,
+                    "Типы данных корректные": true
+                }
+            ]
+        },
+        {
+            "id": "892afa77-e3ae-48ce-9bb7-a0c35d56620d",
+            "name": "200 Find product by ID",
+            "url": "products/id/1",
+            "time": 366,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Время ответа < 500 мс": true,
+                "ID товара равен 1": true,
+                "Типы данных корректные": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Время ответа < 500 мс": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "ID товара равен 1": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Типы данных корректные": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                366
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Время ответа < 500 мс": true,
+                    "ID товара равен 1": true,
+                    "Типы данных корректные": true
+                }
+            ]
+        },
+        {
+            "id": "ea2885cc-61ef-4f22-8def-09dce6464b12",
+            "name": "200 Find product by category",
+            "url": "products/FindByCategory",
+            "time": 399,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Ответ является массивом": true,
+                "Категория товара = Laptops": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Ответ является массивом": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Категория товара = Laptops": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                399
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Ответ является массивом": true,
+                    "Категория товара = Laptops": true
+                }
+            ]
+        },
+        {
+            "id": "205fc935-f168-4e1b-94dd-b6860be1e312",
+            "name": "200 Find product by manufacturer",
+            "url": "products/FindByManufacturer",
+            "time": 270,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true,
+                "Ответ является массивом": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Ответ является массивом": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                270
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true,
+                    "Ответ является массивом": true
+                }
+            ]
+        },
+        {
+            "id": "5cb885de-bf91-43ab-a44a-1b14cf244c2a",
+            "name": "200 Find a product with free shipping.",
+            "url": "products/FindByShipping",
+            "time": 532,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                532
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "1da414f5-e807-4f73-acb1-04dafe17c9a4",
+            "name": "200 Filtering the product list",
+            "url": "products/filter",
+            "time": 206,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                206
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "dd7003fd-df79-48f1-8a98-08c953cc5859",
+            "name": "200 Add a new product",
+            "url": "add-product",
+            "time": 501,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true,
+                "Response contains product ID": true,
+                "Product ID extracted": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains product ID": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Product ID extracted": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                501
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true,
+                    "Response contains product ID": true,
+                    "Product ID extracted": true
+                }
+            ]
+        },
+        {
+            "id": "6cb13d0b-7785-4af3-a5b3-33c5a5592aa1",
+            "name": "200 Partially update product by ID",
+            "url": "products/id/{{product_id}}",
+            "time": 437,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                437
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true
+                }
+            ]
+        },
+        {
+            "id": "7a2af53d-bec3-4692-afbf-0b5ca267d602",
+            "name": "200 Complete product update by ID",
+            "url": "products/id/{{product_id}}",
+            "time": 187,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Статус код 200": true
+            },
+            "testPassFailCounts": {
+                "Статус код 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                187
+            ],
+            "allTests": [
+                {
+                    "Статус код 200": true
+                }
+            ]
+        },
+        {
+            "id": "e6a54e4d-9ee9-43af-95cc-aed77e7fe83d",
+            "name": "200 Add product to cart",
+            "url": "cart",
+            "time": 440,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true,
+                "Response contains user cart ID": true,
+                "Cart user ID extracted": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains user cart ID": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Cart user ID extracted": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                440
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true,
+                    "Response contains user cart ID": true,
+                    "Cart user ID extracted": true
+                }
+            ]
+        },
+        {
+            "id": "899be44b-9710-4b0f-8285-cde562f5dff6",
+            "name": "200 Get user cart contents",
+            "url": "getCart",
+            "time": 73,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true,
+                "Response is an array": true,
+                "Cart is not empty": true,
+                "cart_item_id exists": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response is an array": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Cart is not empty": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "cart_item_id exists": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                73
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true,
+                    "Response is an array": true,
+                    "Cart is not empty": true,
+                    "cart_item_id exists": true
+                }
+            ]
+        },
+        {
+            "id": "5423c079-d002-4f6a-9a6e-479525ec250e",
+            "name": "200 Update quantity to cart",
+            "url": "cart/{{cart_item_id}}",
+            "time": 188,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                188
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "fc4dbd0e-cb6a-4343-a450-f78720c894ab",
+            "name": "201 Create order",
+            "url": "orders",
+            "time": 194,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 201": true,
+                "Response contains success message": true,
+                "Response contains orderId": true
+            },
+            "testPassFailCounts": {
+                "Status code is 201": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains success message": {
+                    "pass": 1,
+                    "fail": 0
+                },
+                "Response contains orderId": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                194
+            ],
+            "allTests": [
+                {
+                    "Status code is 201": true,
+                    "Response contains success message": true,
+                    "Response contains orderId": true
+                }
+            ]
+        },
+        {
+            "id": "ed94c71a-4d99-4a16-b2b7-772f4909d15f",
+            "name": "200 Get list all orders",
+            "url": "user-orders",
+            "time": 364,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                364
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "473501ae-88a4-4402-b1ea-97d0ee979e6d",
+            "name": "200 Change item quantity",
+            "url": "orders/{{order_id}}/products/{{product_id}}",
+            "time": 411,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                411
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "9320b3cf-98f2-4322-a792-376f28ed2505",
+            "name": "200 Recalculate Total",
+            "url": "update-orders-total",
+            "time": 118,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                118
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "13405aa9-5ce3-4de7-b67f-3e9784887e9a",
+            "name": "200 Update to balance",
+            "url": "updateBalances",
+            "time": 103,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                103
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "620511e4-bb5e-4356-989f-f7eb64f9a719",
+            "name": "200 Payment for the order",
+            "url": "pay",
+            "time": 162,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {
+                "Status code is 200": true
+            },
+            "testPassFailCounts": {
+                "Status code is 200": {
+                    "pass": 1,
+                    "fail": 0
+                }
+            },
+            "times": [
+                162
+            ],
+            "allTests": [
+                {
+                    "Status code is 200": true
+                }
+            ]
+        },
+        {
+            "id": "a2400b52-a79b-48aa-af84-67d227bceb02",
+            "name": "200 Get paid history",
+            "url": "api/orders-history",
+            "time": 416,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                416
+            ],
+            "allTests": []
+        }
+    ]
+}

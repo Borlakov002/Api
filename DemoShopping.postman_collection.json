@@ -1,0 +1,3772 @@
+{
+  "info": {
+    "_postman_id": "23704ca9-6d0a-4dcc-baf7-1386796ec2fc",
+    "name": "DemoShopping",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51894840",
+    "_collection_link": "https://go.postman.co/collection/51894840-23704ca9-6d0a-4dcc-baf7-1386796ec2fc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Auth & Reg",
+          "item": [
+            {
+              "name": "Positive",
+              "item": [
+                {
+                  "name": "200 Sign up",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"username\": \"{{Login}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/register",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "register"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Log in",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверка статус кода\r",
+                          "pm.test(\"Status code is 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          "\r",
+                          "// Парсим JSON\r",
+                          "const responseJson = pm.response.json();\r",
+                          "\r",
+                          "// Проверка что есть message\r",
+                          "pm.test(\"Response contains message\", function () {\r",
+                          "    pm.expect(responseJson).to.have.property(\"message\");\r",
+                          "});\r",
+                          "\r",
+                          "// Проверка что есть token\r",
+                          "pm.test(\"Response contains token\", function () {\r",
+                          "    pm.expect(responseJson).to.have.property(\"token\");\r",
+                          "});\r",
+                          "\r",
+                          "// Сохраняем token в переменную окружения\r",
+                          "pm.environment.set(\"key\", responseJson.token);"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"username\": \"{{Login}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/login",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "login"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Negative",
+              "item": [
+                {
+                  "name": "400 Sign up",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"username\": \"{{Login}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/register",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "register"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "400 Log in",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"username\": \"[[Login]]\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/login",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "login"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "User Management",
+          "item": [
+            {
+              "name": "Positive",
+              "item": [
+                {
+                  "name": "200 Add a new user",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверяем что сервер вернул успешный статус код\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          "\r",
+                          "// Получаем тело ответа как текст (так как сервер возвращает HTML/текст)\r",
+                          "let responseText = pm.response.text();\r",
+                          "\r",
+                          "// Проверяем что ответ содержит сообщение об успешном создании пользователя\r",
+                          "pm.test(\"Пользователь успешно создан\", function () {\r",
+                          "    pm.expect(responseText).to.include(\"Пользователь успешно добавлен\");\r",
+                          "});\r",
+                          "\r",
+                          "// Используем регулярное выражение чтобы извлечь ID из строки\r",
+                          "// Например из строки: \"Пользователь успешно добавлен с ID: 3907\"\r",
+                          "let match = responseText.match(/ID:\\s*(\\d+)/);\r",
+                          "\r",
+                          "// Проверяем что ID действительно найден\r",
+                          "pm.test(\"ID пользователя найден\", function () {\r",
+                          "    pm.expect(match).to.not.be.null;\r",
+                          "});\r",
+                          "\r",
+                          "// Если ID найден — сохраняем его в переменную окружения\r",
+                          "if (match) {\r",
+                          "\r",
+                          "    // Берем найденный ID\r",
+                          "    let userId = match[1];\r",
+                          "\r",
+                          "    // Сохраняем ID в переменную test_user_id\r",
+                          "    pm.environment.set(\"test_user_id\", userId);\r",
+                          "\r",
+                          "    // Выводим ID в консоль Postman (полезно для отладки)\r",
+                          "    console.log(\"Созданный test_user_id:\", userId);\r",
+                          "\r",
+                          "}"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"username\": \"HellTest\",\r\n  \"password\": \"HellTest1\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/users",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "users"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Get all users",
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    },
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/users",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "users"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Delete user by ID",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/users/{{test_user_id}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "users",
+                        "{{test_user_id}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Negative",
+              "item": [
+                {
+                  "name": "400 Add a new user",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"username\": \"Hellcat_002Test1\",\r\n  \"password\": \"Hell016002Test1\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/users",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "users"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Get all users",
+                  "protocolProfileBehavior": {
+                    "disabledSystemHeaders": {}
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/users",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "users"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Delete user by ID",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/users/3904",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "users",
+                        "3904"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Catalog & Search",
+          "item": [
+            {
+              "name": "Positive",
+              "item": [
+                {
+                  "name": "200 Get list all products",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Тест: проверяем что сервер вернул статус код 200 (запрос выполнен успешно)\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          "\r",
+                          "// Тест: проверяем что время ответа сервера меньше 500 миллисекунд\r",
+                          "pm.test(\"Время ответа меньше 500 мс\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                          "});\r",
+                          "\r",
+                          "// Тест: проверяем что ответ сервера имеет формат JSON\r",
+                          "pm.test(\"Ответ является JSON\", function () {\r",
+                          "    pm.response.to.be.json;\r",
+                          "});\r",
+                          "\r",
+                          "// Преобразуем тело ответа в JSON объект\r",
+                          "let jsonData = pm.response.json();\r",
+                          "\r",
+                          "// Тест: проверяем что сервер вернул массив товаров\r",
+                          "pm.test(\"Ответ является массивом\", function () {\r",
+                          "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                          "});\r",
+                          "\r",
+                          "// Тест: проверяем что массив товаров не пустой\r",
+                          "pm.test(\"Список товаров не пустой\", function () {\r",
+                          "    pm.expect(jsonData.length).to.be.above(0);\r",
+                          "});\r",
+                          "\r",
+                          "// Берём первый товар из массива для проверки структуры\r",
+                          "let product = jsonData[0];\r",
+                          "\r",
+                          "// Тест: проверяем что у товара есть нужные поля\r",
+                          "pm.test(\"Товар содержит обязательные поля\", function () {\r",
+                          "    pm.expect(product).to.have.property(\"product_id\");\r",
+                          "    pm.expect(product).to.have.property(\"name\");\r",
+                          "    pm.expect(product).to.have.property(\"price\");\r",
+                          "    pm.expect(product).to.have.property(\"category\");\r",
+                          "});\r",
+                          "\r",
+                          "// Тест: проверяем тип данных у полей\r",
+                          "pm.test(\"Типы данных корректные\", function () {\r",
+                          "\r",
+                          "    // product_id должен быть числом\r",
+                          "    pm.expect(product.product_id).to.be.a(\"number\");\r",
+                          "\r",
+                          "    // name должен быть строкой\r",
+                          "    pm.expect(product.name).to.be.a(\"string\");\r",
+                          "\r",
+                          "    // price должен быть строкой\r",
+                          "    pm.expect(product.price).to.be.a(\"string\");\r",
+                          "\r",
+                          "});"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Find product by ID",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверяем статус код ответа\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          "\r",
+                          "// Проверяем время ответа\r",
+                          "pm.test(\"Время ответа < 500 мс\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                          "});\r",
+                          "\r",
+                          "// Получаем JSON из ответа\r",
+                          "let jsonData = pm.response.json();\r",
+                          "\r",
+                          "// Проверяем что product_id равен 1\r",
+                          "pm.test(\"ID товара равен 1\", function () {\r",
+                          "    pm.expect(jsonData.product_id).to.eql(1);\r",
+                          "});\r",
+                          "\r",
+                          "// Проверяем типы данных\r",
+                          "pm.test(\"Типы данных корректные\", function () {\r",
+                          "\r",
+                          "    // name должен быть строкой\r",
+                          "    pm.expect(jsonData.name).to.be.a(\"string\");\r",
+                          "\r",
+                          "    // price должен быть строкой\r",
+                          "    pm.expect(jsonData.price).to.be.a(\"string\");\r",
+                          "\r",
+                          "    // category должен быть строкой\r",
+                          "    pm.expect(jsonData.category).to.be.a(\"string\");\r",
+                          "\r",
+                          "});"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/1",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "1"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Find product by category",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверяем статус ответа сервера\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          "\r",
+                          "// Получаем JSON ответ\r",
+                          "let jsonData = pm.response.json();\r",
+                          "\r",
+                          "// Проверяем что ответ является массивом\r",
+                          "pm.test(\"Ответ является массивом\", function () {\r",
+                          "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                          "});\r",
+                          "\r",
+                          "// Проходим по каждому товару в массиве\r",
+                          "jsonData.forEach(product => {\r",
+                          "\r",
+                          "    // Проверяем что категория соответствует фильтру\r",
+                          "    pm.test(\"Категория товара = Laptops\", function () {\r",
+                          "\r",
+                          "        pm.expect(product.category).to.eql(\"Laptops\");\r",
+                          "\r",
+                          "    });\r",
+                          "\r",
+                          "});"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/FindByCategory?category=Laptops",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "FindByCategory"
+                      ],
+                      "query": [
+                        {
+                          "key": "category",
+                          "value": "Phones",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "category",
+                          "value": "Laptops"
+                        },
+                        {
+                          "key": "category",
+                          "value": "Watches",
+                          "disabled": true
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Find product by manufacturer",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверяем статус ответа сервера\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          "\r",
+                          "// Получаем JSON ответ\r",
+                          "let jsonData = pm.response.json();\r",
+                          "\r",
+                          "// Проверяем что ответ является массивом\r",
+                          "pm.test(\"Ответ является массивом\", function () {\r",
+                          "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                          "});"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/FindByManufacturer?manufacturer=Huawei",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "FindByManufacturer"
+                      ],
+                      "query": [
+                        {
+                          "key": "manufacturer",
+                          "value": "Apple",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "manufacturer",
+                          "value": "Xiaomi",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "manufacturer",
+                          "value": "Huawei"
+                        },
+                        {
+                          "key": "manufacturer",
+                          "value": "Samsung",
+                          "disabled": true
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Find a product with free shipping.",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/FindByShipping?freeShipping=false",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "FindByShipping"
+                      ],
+                      "query": [
+                        {
+                          "key": "freeShipping",
+                          "value": "true",
+                          "disabled": true
+                        },
+                        {
+                          "key": "freeShipping",
+                          "value": "false",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Filtering the product list",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/filter?category=Laptops&manufacturer=MSI&freeShipping=false&minPrice=1000&maxPrice=1500",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "filter"
+                      ],
+                      "query": [
+                        {
+                          "key": "category",
+                          "value": "Laptops"
+                        },
+                        {
+                          "key": "manufacturer",
+                          "value": "MSI"
+                        },
+                        {
+                          "key": "freeShipping",
+                          "value": "false"
+                        },
+                        {
+                          "key": "minPrice",
+                          "value": "1000"
+                        },
+                        {
+                          "key": "maxPrice",
+                          "value": "1500"
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Negative",
+              "item": [
+                {
+                  "name": "404 Find product by ID",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/22844",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "22844"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Find product by category",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/FindByCategory?category=$%^%26*()(*%26^%",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "FindByCategory"
+                      ],
+                      "query": [
+                        {
+                          "key": "category",
+                          "value": "Phones",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "category",
+                          "value": "Laptops",
+                          "disabled": true
+                        },
+                        {
+                          "key": "category",
+                          "value": "$%^%26*()(*%26^%"
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Find product by manufacturer",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/FindByManufacturer?manufacturer=%^%26*()_)(*%26^",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "FindByManufacturer"
+                      ],
+                      "query": [
+                        {
+                          "key": "manufacturer",
+                          "value": "Apple",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "manufacturer",
+                          "value": "Xiaomi",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "manufacturer",
+                          "value": "Huawei",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "manufacturer",
+                          "value": "%^&*()_)(*&^"
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 (Returns 200) Find a product with free shipping.",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/FindByShipping?freeShipping=^%26*&freeShipping=^%26*",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "FindByShipping"
+                      ],
+                      "query": [
+                        {
+                          "key": "freeShipping",
+                          "value": "^&*"
+                        },
+                        {
+                          "key": "freeShipping",
+                          "value": "^&*",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "400 Filtering the product list",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/products/filter?category=^%26*(",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "filter"
+                      ],
+                      "query": [
+                        {
+                          "key": "freeShipping",
+                          "value": "false",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "manufacturer",
+                          "value": "MSI",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "maxPrice",
+                          "value": "1500",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "minPrice",
+                          "value": "1000",
+                          "type": "text",
+                          "disabled": true
+                        },
+                        {
+                          "key": "category",
+                          "value": "^%26*("
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Product Management",
+          "item": [
+            {
+              "name": "Positive",
+              "item": [
+                {
+                  "name": "200 Add a new product",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверка статус кода\r",
+                          "pm.test(\"Status code is 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          "\r",
+                          "// Получаем текст ответа (HTML / text)\r",
+                          "let responseText = pm.response.text();\r",
+                          "\r",
+                          "// Проверяем что сообщение содержит ID\r",
+                          "pm.test(\"Response contains product ID\", function () {\r",
+                          "    pm.expect(responseText).to.include(\"ID\");\r",
+                          "});\r",
+                          "\r",
+                          "// Вытаскиваем ID через RegEx\r",
+                          "let match = responseText.match(/ID:\\s*(\\d+)/);\r",
+                          "\r",
+                          "// Проверяем что ID найден\r",
+                          "pm.test(\"Product ID extracted\", function () {\r",
+                          "    pm.expect(match).to.not.be.null;\r",
+                          "});\r",
+                          "\r",
+                          "// Сохраняем ID в переменную\r",
+                          "if (match) {\r",
+                          "    let productID = match[1];\r",
+                          "    pm.environment.set(\"product_id\", productID);\r",
+                          "\r",
+                          "    console.log(\"Saved product_id:\", productID);\r",
+                          "}"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE\",\r\n  \"description\": \"Производительный игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1300,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": false\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/add-product",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "add-product"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Partially update product by ID",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверяем статус код\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE\",\r\n  \"description\": \"Производительный игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1400,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": false\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/{{product_id}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "{{product_id}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Complete product update by ID",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверяем статус ответа\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE-Ultra\",\r\n  \"description\": \"Производительный супер игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1500,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": false\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/{{product_id}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "{{product_id}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Delete product by ID",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверяем статус ответа\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "\r",
+                          "});\r",
+                          "\r",
+                          "// Получаем текст ответа\r",
+                          "let responseText = pm.response.text();"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/{{product_id}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "{{product_id}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Negative",
+              "item": [
+                {
+                  "name": "400 Add a new product",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE\",\r\n  \"description\": \"Производительный игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1300,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\"\r\n  /*\"freeShipping\": false*/\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/add-product",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "add-product"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "400 Partially update product by ID",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE\",\r\n  \"description\": \"Производительный игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1300,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": fals\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/22852",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "22852"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Partially update product by ID",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE\",\r\n  \"description\": \"Производительный игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1300,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": false\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/22844",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "22844"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "400 Complete product update by ID",
+                  "request": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE\",\r\n  \"description\": \"Производительный игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1300,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": fals\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/22852",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "22852"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Complete product update by ID",
+                  "request": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE\",\r\n  \"description\": \"Производительный игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1300,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": false\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/22851",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "22851"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "403 Delete product by ID",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/50",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "50"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Delete product by ID",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/products/id/22844",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "products",
+                        "id",
+                        "22844"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cart",
+      "item": [
+        {
+          "name": "Cart Operations",
+          "item": [
+            {
+              "name": "Positive",
+              "item": [
+                {
+                  "name": "200 Add product to cart",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверка статус кода\r",
+                          "pm.test(\"Status code is 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          "\r",
+                          "// Получаем текст ответа (HTML / text)\r",
+                          "let responseText = pm.response.text();\r",
+                          "\r",
+                          "// Проверяем что ответ содержит ID\r",
+                          "pm.test(\"Response contains user cart ID\", function () {\r",
+                          "    pm.expect(responseText).to.include(\"ID\");\r",
+                          "});\r",
+                          "\r",
+                          "// Извлекаем ID через RegEx\r",
+                          "let match = responseText.match(/ID:\\s*(\\d+)/);\r",
+                          "\r",
+                          "// Проверяем что ID найден\r",
+                          "pm.test(\"Cart user ID extracted\", function () {\r",
+                          "    pm.expect(match).to.not.be.null;\r",
+                          "});\r",
+                          "\r",
+                          "// Сохраняем ID в переменную окружения\r",
+                          "if (match) {\r",
+                          "    let cartUserId = match[1];\r",
+                          "\r",
+                          "    pm.environment.set(\"user_id\", cartUserId);\r",
+                          "\r",
+                          "    console.log(\"Saved user_id:\", cartUserId);\r",
+                          "}"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"productId\": {{product_id}},\r\n  \"quantity\": 3\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/cart",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Get user cart contents",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверка статус кода\r",
+                          "pm.test(\"Status code is 200\", function () {\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "});\r",
+                          "\r",
+                          "// Парсим JSON\r",
+                          "let jsonData = pm.response.json();\r",
+                          "\r",
+                          "// Проверяем что ответ массив\r",
+                          "pm.test(\"Response is an array\", function () {\r",
+                          "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                          "});\r",
+                          "\r",
+                          "// Проверяем что массив не пустой\r",
+                          "pm.test(\"Cart is not empty\", function () {\r",
+                          "    pm.expect(jsonData.length).to.be.above(0);\r",
+                          "});\r",
+                          "\r",
+                          "// Берем первый элемент массива\r",
+                          "let cartItem = jsonData[0];\r",
+                          "\r",
+                          "// Проверяем наличие cart_item_id\r",
+                          "pm.test(\"cart_item_id exists\", function () {\r",
+                          "    pm.expect(cartItem).to.have.property(\"cart_item_id\");\r",
+                          "});\r",
+                          "\r",
+                          "// Сохраняем cart_item_id в переменную окружения\r",
+                          "pm.environment.set(\"cart_item_id\", cartItem.cart_item_id);\r",
+                          "\r",
+                          "// Выводим в консоль\r",
+                          "console.log(\"Saved cart_item_id:\", cartItem.cart_item_id);"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/getCart",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "getCart"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Update quantity to cart",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"quantity\": 5\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/cart/{{cart_item_id}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart",
+                        "{{cart_item_id}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Remove item from cart",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверяем статус ответа\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "\r",
+                          "});\r",
+                          "\r",
+                          "// Получаем текст ответа\r",
+                          "let responseText = pm.response.text();"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/cart/{{cart_item_id}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart",
+                        "{{cart_item_id}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Negative",
+              "item": [
+                {
+                  "name": "400 Add product to cart",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"productId\": 22853,\r\n  \"quantity\": x\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/cart",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "401 Add product to cart",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"productId\": 22853,\r\n  \"quantity\": 2\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/cart",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Add product to cart",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"productId\": 66666,\r\n  \"quantity\": 2\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/cart",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "401 Get user cart contents",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/getCart",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "getCart"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Get user cart contents",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/getCart",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "getCart"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Get user cart contents",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "400 Update quantity to cart",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"quantity\": z\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/cart/21789",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart",
+                        "21789"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "401 Update quantity to cart",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"quantity\": 5\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/cart/21789",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart",
+                        "21789"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Update quantity to cart",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"quantity\": 5\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/cart/2178",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart",
+                        "2178"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Update quantity to cart",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "400 Remove item from cart",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/cart/фвыалофвы",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart",
+                        "фвыалофвы"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "401 Remove item from cart",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/cart/21789",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart",
+                        "21789"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Remove item from cart",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/cart/21789",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "cart",
+                        "21789"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Remove item from cart",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Order Lifecycle",
+          "item": [
+            {
+              "name": "Positive",
+              "item": [
+                {
+                  "name": "201 Create order",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверка статус кода\r",
+                          "pm.test(\"Status code is 201\", function () {\r",
+                          "    pm.response.to.have.status(201);\r",
+                          "});\r",
+                          "\r",
+                          "// Парсим JSON ответ\r",
+                          "let jsonData = pm.response.json();\r",
+                          "\r",
+                          "// Проверяем наличие message\r",
+                          "pm.test(\"Response contains success message\", function () {\r",
+                          "    pm.expect(jsonData).to.have.property(\"message\");\r",
+                          "});\r",
+                          "\r",
+                          "// Проверяем наличие orderId\r",
+                          "pm.test(\"Response contains orderId\", function () {\r",
+                          "    pm.expect(jsonData).to.have.property(\"orderId\");\r",
+                          "});\r",
+                          "\r",
+                          "// Сохраняем orderId в переменную окружения\r",
+                          "pm.environment.set(\"order_id\", jsonData.orderId);\r",
+                          "\r",
+                          "// Лог в консоль Postman\r",
+                          "console.log(\"Saved order_id:\", jsonData.orderId);"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/orders",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Get list all orders",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/user-orders",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "user-orders"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Change item quantity",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"quantity\": 1\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/orders/{{order_id}}/products/{{product_id}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "{{order_id}}",
+                        "products",
+                        "{{product_id}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Recalculate Total",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/update-orders-total",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "update-orders-total"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Remove item from order",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "// Проверяем статус ответа\r",
+                          "pm.test(\"Статус код 200\", function () {\r",
+                          "\r",
+                          "    pm.response.to.have.status(200);\r",
+                          "\r",
+                          "});\r",
+                          "\r",
+                          "// Получаем текст ответа\r",
+                          "let responseText = pm.response.text();"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/orders/{{order_id}}/products/{{product_id}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "{{order_id}}",
+                        "products",
+                        "{{product_id}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "200 Get paid history",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/api/orders-history",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "orders-history"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Negative",
+              "item": [
+                {
+                  "name": "401 Create order",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/orders",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Create order",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "401 Get list all orders",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/user-orders",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "user-orders"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Get list all orders",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "400 Change item quantity",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"quantity\": z\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/orders/6901/products/22854",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "6901",
+                        "products",
+                        "22854"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "401 Change item quantity",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"quantity\": 0\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/orders/6901/products/22854",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "6901",
+                        "products",
+                        "22854"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Change item quantity",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"quantity\": 1\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/orders/690/products/22854",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "690",
+                        "products",
+                        "22854"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Change item quantity",
+                  "request": {
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"quantity\": 100000\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/orders/6901/products/22854",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "6901",
+                        "products",
+                        "22854"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "401 Recalculate Total",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_URL}}/update-orders-total",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "update-orders-total"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Recalculate Total",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "400 Remove item from order",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "401 Remove item from order",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/orders/6901/products/22854",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "6901",
+                        "products",
+                        "22854"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "404 Remove item from order",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}/orders/6901/products/22854",
+                      "host": [
+                        "{{base_URL}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "6901",
+                        "products",
+                        "22854"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Remove item from order",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "401 Get paid history",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "500 Get paid history",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{base_URL}}",
+                      "host": [
+                        "{{base_URL}}"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Payment Managament",
+          "item": [
+            {
+              "name": "200 Update to balance",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_URL}}/updateBalances",
+                  "host": [
+                    "{{base_URL}}"
+                  ],
+                  "path": [
+                    "updateBalances"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "500 Update to balance",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_URL}}/updateBalances",
+                  "host": [
+                    "{{base_URL}}"
+                  ],
+                  "path": [
+                    "updateBalances"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Payment Operations",
+          "item": [
+            {
+              "name": "200 Payment for the order",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"card_type\": \"VISA\",\r\n  \"card_code\": \"{{VISA_card_code}}\",\r\n  \"expiry_month\": 12,\r\n  \"expiry_year\": 26,\r\n  \"cvv\": \"123\",\r\n  \"email\": \"user@example.com\",\r\n  \"email_paypal\": \"user@example.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_URL}}/pay",
+                  "host": [
+                    "{{base_URL}}"
+                  ],
+                  "path": [
+                    "pay"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "400 Payment for the order",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_URL}}",
+                  "host": [
+                    "{{base_URL}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "401 Payment for the order",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_URL}}",
+                  "host": [
+                    "{{base_URL}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "500 Payment for the order",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_URL}}",
+                  "host": [
+                    "{{base_URL}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Database ZZ - Cleanup",
+      "item": [
+        {
+          "name": "200 Resetting the database",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}",
+              "host": [
+                "{{base_URL}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "500 Resetting the database",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}",
+              "host": [
+                "{{base_URL}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "00_Full_Run",
+      "item": [
+        {
+          "name": "200 Log in",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверка статус кода\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Парсим JSON\r",
+                  "const responseJson = pm.response.json();\r",
+                  "\r",
+                  "// Проверка что есть message\r",
+                  "pm.test(\"Response contains message\", function () {\r",
+                  "    pm.expect(responseJson).to.have.property(\"message\");\r",
+                  "});\r",
+                  "\r",
+                  "// Проверка что есть token\r",
+                  "pm.test(\"Response contains token\", function () {\r",
+                  "    pm.expect(responseJson).to.have.property(\"token\");\r",
+                  "});\r",
+                  "\r",
+                  "// Сохраняем token в переменную окружения\r",
+                  "pm.environment.set(\"key\", responseJson.token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"{{Login}}\",\r\n  \"password\": \"{{Password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/login",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Add a new user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверяем что сервер вернул успешный статус код\r",
+                  "pm.test(\"Статус код 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Получаем тело ответа как текст (так как сервер возвращает HTML/текст)\r",
+                  "let responseText = pm.response.text();\r",
+                  "\r",
+                  "// Проверяем что ответ содержит сообщение об успешном создании пользователя\r",
+                  "pm.test(\"Пользователь успешно создан\", function () {\r",
+                  "    pm.expect(responseText).to.include(\"Пользователь успешно добавлен\");\r",
+                  "});\r",
+                  "\r",
+                  "// Используем регулярное выражение чтобы извлечь ID из строки\r",
+                  "// Например из строки: \"Пользователь успешно добавлен с ID: 3907\"\r",
+                  "let match = responseText.match(/ID:\\s*(\\d+)/);\r",
+                  "\r",
+                  "// Проверяем что ID действительно найден\r",
+                  "pm.test(\"ID пользователя найден\", function () {\r",
+                  "    pm.expect(match).to.not.be.null;\r",
+                  "});\r",
+                  "\r",
+                  "// Если ID найден — сохраняем его в переменную окружения\r",
+                  "if (match) {\r",
+                  "\r",
+                  "    // Берем найденный ID\r",
+                  "    let userId = match[1];\r",
+                  "\r",
+                  "    // Сохраняем ID в переменную test_user_id\r",
+                  "    pm.environment.set(\"test_user_id\", userId);\r",
+                  "\r",
+                  "    // Выводим ID в консоль Postman (полезно для отладки)\r",
+                  "    console.log(\"Созданный test_user_id:\", userId);\r",
+                  "\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"HellTest\",\r\n  \"password\": \"HellTest1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/users",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Get all users",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/users",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Delete user by ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/users/{{test_user_id}}",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "users",
+                "{{test_user_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Get list all products",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Тест: проверяем что сервер вернул статус код 200 (запрос выполнен успешно)\r",
+                  "pm.test(\"Статус код 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Тест: проверяем что время ответа сервера меньше 500 миллисекунд\r",
+                  "pm.test(\"Время ответа меньше 500 мс\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "});\r",
+                  "\r",
+                  "// Тест: проверяем что ответ сервера имеет формат JSON\r",
+                  "pm.test(\"Ответ является JSON\", function () {\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "// Преобразуем тело ответа в JSON объект\r",
+                  "let jsonData = pm.response.json();\r",
+                  "\r",
+                  "// Тест: проверяем что сервер вернул массив товаров\r",
+                  "pm.test(\"Ответ является массивом\", function () {\r",
+                  "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "// Тест: проверяем что массив товаров не пустой\r",
+                  "pm.test(\"Список товаров не пустой\", function () {\r",
+                  "    pm.expect(jsonData.length).to.be.above(0);\r",
+                  "});\r",
+                  "\r",
+                  "// Берём первый товар из массива для проверки структуры\r",
+                  "let product = jsonData[0];\r",
+                  "\r",
+                  "// Тест: проверяем что у товара есть нужные поля\r",
+                  "pm.test(\"Товар содержит обязательные поля\", function () {\r",
+                  "    pm.expect(product).to.have.property(\"product_id\");\r",
+                  "    pm.expect(product).to.have.property(\"name\");\r",
+                  "    pm.expect(product).to.have.property(\"price\");\r",
+                  "    pm.expect(product).to.have.property(\"category\");\r",
+                  "});\r",
+                  "\r",
+                  "// Тест: проверяем тип данных у полей\r",
+                  "pm.test(\"Типы данных корректные\", function () {\r",
+                  "\r",
+                  "    // product_id должен быть числом\r",
+                  "    pm.expect(product.product_id).to.be.a(\"number\");\r",
+                  "\r",
+                  "    // name должен быть строкой\r",
+                  "    pm.expect(product.name).to.be.a(\"string\");\r",
+                  "\r",
+                  "    // price должен быть строкой\r",
+                  "    pm.expect(product.price).to.be.a(\"string\");\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/products",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Find product by ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверяем статус код ответа\r",
+                  "pm.test(\"Статус код 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверяем время ответа\r",
+                  "pm.test(\"Время ответа < 500 мс\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "});\r",
+                  "\r",
+                  "// Получаем JSON из ответа\r",
+                  "let jsonData = pm.response.json();\r",
+                  "\r",
+                  "// Проверяем что product_id равен 1\r",
+                  "pm.test(\"ID товара равен 1\", function () {\r",
+                  "    pm.expect(jsonData.product_id).to.eql(1);\r",
+                  "});\r",
+                  "\r",
+                  "// Проверяем типы данных\r",
+                  "pm.test(\"Типы данных корректные\", function () {\r",
+                  "\r",
+                  "    // name должен быть строкой\r",
+                  "    pm.expect(jsonData.name).to.be.a(\"string\");\r",
+                  "\r",
+                  "    // price должен быть строкой\r",
+                  "    pm.expect(jsonData.price).to.be.a(\"string\");\r",
+                  "\r",
+                  "    // category должен быть строкой\r",
+                  "    pm.expect(jsonData.category).to.be.a(\"string\");\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/products/id/1",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "products",
+                "id",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Find product by category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверяем статус ответа сервера\r",
+                  "pm.test(\"Статус код 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Получаем JSON ответ\r",
+                  "let jsonData = pm.response.json();\r",
+                  "\r",
+                  "// Проверяем что ответ является массивом\r",
+                  "pm.test(\"Ответ является массивом\", function () {\r",
+                  "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "// Проходим по каждому товару в массиве\r",
+                  "jsonData.forEach(product => {\r",
+                  "\r",
+                  "    // Проверяем что категория соответствует фильтру\r",
+                  "    pm.test(\"Категория товара = Laptops\", function () {\r",
+                  "\r",
+                  "        pm.expect(product.category).to.eql(\"Laptops\");\r",
+                  "\r",
+                  "    });\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/products/FindByCategory?category=Laptops",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "products",
+                "FindByCategory"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Phones",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "Laptops"
+                },
+                {
+                  "key": "category",
+                  "value": "Watches",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Find product by manufacturer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверяем статус ответа сервера\r",
+                  "pm.test(\"Статус код 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Получаем JSON ответ\r",
+                  "let jsonData = pm.response.json();\r",
+                  "\r",
+                  "// Проверяем что ответ является массивом\r",
+                  "pm.test(\"Ответ является массивом\", function () {\r",
+                  "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/products/FindByManufacturer?manufacturer=Huawei",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "products",
+                "FindByManufacturer"
+              ],
+              "query": [
+                {
+                  "key": "manufacturer",
+                  "value": "Apple",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "manufacturer",
+                  "value": "Xiaomi",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "manufacturer",
+                  "value": "Huawei"
+                },
+                {
+                  "key": "manufacturer",
+                  "value": "Samsung",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Find a product with free shipping.",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/products/FindByShipping?freeShipping=false",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "products",
+                "FindByShipping"
+              ],
+              "query": [
+                {
+                  "key": "freeShipping",
+                  "value": "true",
+                  "disabled": true
+                },
+                {
+                  "key": "freeShipping",
+                  "value": "false"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Filtering the product list",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/products/filter?category=Laptops&manufacturer=MSI&freeShipping=false&minPrice=1000&maxPrice=1500",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "products",
+                "filter"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Laptops"
+                },
+                {
+                  "key": "manufacturer",
+                  "value": "MSI"
+                },
+                {
+                  "key": "freeShipping",
+                  "value": "false"
+                },
+                {
+                  "key": "minPrice",
+                  "value": "1000"
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "1500"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Add a new product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверка статус кода\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Получаем текст ответа (HTML / text)\r",
+                  "let responseText = pm.response.text();\r",
+                  "\r",
+                  "// Проверяем что сообщение содержит ID\r",
+                  "pm.test(\"Response contains product ID\", function () {\r",
+                  "    pm.expect(responseText).to.include(\"ID\");\r",
+                  "});\r",
+                  "\r",
+                  "// Вытаскиваем ID через RegEx\r",
+                  "let match = responseText.match(/ID:\\s*(\\d+)/);\r",
+                  "\r",
+                  "// Проверяем что ID найден\r",
+                  "pm.test(\"Product ID extracted\", function () {\r",
+                  "    pm.expect(match).to.not.be.null;\r",
+                  "});\r",
+                  "\r",
+                  "// Сохраняем ID в переменную\r",
+                  "if (match) {\r",
+                  "    let productID = match[1];\r",
+                  "    pm.environment.set(\"product_id\", productID);\r",
+                  "\r",
+                  "    console.log(\"Saved product_id:\", productID);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE\",\r\n  \"description\": \"Производительный игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1300,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/add-product",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "add-product"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Partially update product by ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверяем статус код\r",
+                  "pm.test(\"Статус код 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE\",\r\n  \"description\": \"Производительный игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1400,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/products/id/{{product_id}}",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "products",
+                "id",
+                "{{product_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Complete product update by ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверяем статус ответа\r",
+                  "pm.test(\"Статус код 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"MSI Katana GF66 12UE-Ultra\",\r\n  \"description\": \"Производительный супер игровой ноутбук начального-среднего уровня.\",\r\n  \"price\": 1500,\r\n  \"category\": \"Laptops\",\r\n  \"manufacturer\": \"MSI\",\r\n  \"imageUrl\": \"/images/laptop.webp\",\r\n  \"freeShipping\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/products/id/{{product_id}}",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "products",
+                "id",
+                "{{product_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Add product to cart",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверка статус кода\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Получаем текст ответа (HTML / text)\r",
+                  "let responseText = pm.response.text();\r",
+                  "\r",
+                  "// Проверяем что ответ содержит ID\r",
+                  "pm.test(\"Response contains user cart ID\", function () {\r",
+                  "    pm.expect(responseText).to.include(\"ID\");\r",
+                  "});\r",
+                  "\r",
+                  "// Извлекаем ID через RegEx\r",
+                  "let match = responseText.match(/ID:\\s*(\\d+)/);\r",
+                  "\r",
+                  "// Проверяем что ID найден\r",
+                  "pm.test(\"Cart user ID extracted\", function () {\r",
+                  "    pm.expect(match).to.not.be.null;\r",
+                  "});\r",
+                  "\r",
+                  "// Сохраняем ID в переменную окружения\r",
+                  "if (match) {\r",
+                  "    let cartUserId = match[1];\r",
+                  "\r",
+                  "    pm.environment.set(\"user_id\", cartUserId);\r",
+                  "\r",
+                  "    console.log(\"Saved user_id:\", cartUserId);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"productId\": {{product_id}},\r\n  \"quantity\": 3\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/cart",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "cart"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Get user cart contents",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверка статус кода\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Парсим JSON\r",
+                  "let jsonData = pm.response.json();\r",
+                  "\r",
+                  "// Проверяем что ответ массив\r",
+                  "pm.test(\"Response is an array\", function () {\r",
+                  "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "// Проверяем что массив не пустой\r",
+                  "pm.test(\"Cart is not empty\", function () {\r",
+                  "    pm.expect(jsonData.length).to.be.above(0);\r",
+                  "});\r",
+                  "\r",
+                  "// Берем первый элемент массива\r",
+                  "let cartItem = jsonData[0];\r",
+                  "\r",
+                  "// Проверяем наличие cart_item_id\r",
+                  "pm.test(\"cart_item_id exists\", function () {\r",
+                  "    pm.expect(cartItem).to.have.property(\"cart_item_id\");\r",
+                  "});\r",
+                  "\r",
+                  "// Сохраняем cart_item_id в переменную окружения\r",
+                  "pm.environment.set(\"cart_item_id\", cartItem.cart_item_id);\r",
+                  "\r",
+                  "// Выводим в консоль\r",
+                  "console.log(\"Saved cart_item_id:\", cartItem.cart_item_id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/getCart",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "getCart"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Update quantity to cart",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"quantity\": 5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/cart/{{cart_item_id}}",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "cart",
+                "{{cart_item_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "201 Create order",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Проверка статус кода\r",
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "// Парсим JSON ответ\r",
+                  "let jsonData = pm.response.json();\r",
+                  "\r",
+                  "// Проверяем наличие message\r",
+                  "pm.test(\"Response contains success message\", function () {\r",
+                  "    pm.expect(jsonData).to.have.property(\"message\");\r",
+                  "});\r",
+                  "\r",
+                  "// Проверяем наличие orderId\r",
+                  "pm.test(\"Response contains orderId\", function () {\r",
+                  "    pm.expect(jsonData).to.have.property(\"orderId\");\r",
+                  "});\r",
+                  "\r",
+                  "// Сохраняем orderId в переменную окружения\r",
+                  "pm.environment.set(\"order_id\", jsonData.orderId);\r",
+                  "\r",
+                  "// Лог в консоль Postman\r",
+                  "console.log(\"Saved order_id:\", jsonData.orderId);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/orders",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Get list all orders",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/user-orders",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "user-orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Change item quantity",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"quantity\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/orders/{{order_id}}/products/{{product_id}}",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "orders",
+                "{{order_id}}",
+                "products",
+                "{{product_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Recalculate Total",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/update-orders-total",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "update-orders-total"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Update to balance",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/updateBalances",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "updateBalances"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Payment for the order",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"card_type\": \"VISA\",\r\n  \"card_code\": \"{{VISA_card_code}}\",\r\n  \"expiry_month\": 12,\r\n  \"expiry_year\": 26,\r\n  \"cvv\": \"123\",\r\n  \"email\": \"user@example.com\",\r\n  \"email_paypal\": \"user@example.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_URL}}/pay",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "pay"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "200 Get paid history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_URL}}/api/orders-history",
+              "host": [
+                "{{base_URL}}"
+              ],
+              "path": [
+                "api",
+                "orders-history"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
